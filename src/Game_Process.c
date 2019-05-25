@@ -11,3 +11,23 @@ void LogicMain(int quantity_players)
     }
     GameOver(player);
 }
+void FillBoard()
+{
+    for (int i = 0, i < 25, i++)
+    {
+        board[i] = i++;
+    }
+}
+void AddPlayers()
+{
+    player = (int **)malloc(5 * sizeof(int *));
+    for (int i = 0; i < QuantityPlayers; i++)
+    {
+        player[i] = (int *)malloc(3 * sizeof(int));
+        for (int j = 0; j < 2; j++)
+        {
+            player[i][0] = i++;
+            player[i][1] = 0;
+        };
+    };
+}
