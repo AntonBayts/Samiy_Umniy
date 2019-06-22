@@ -2,71 +2,74 @@
 #include <stdlib.h>
 #include <iostream>
 
-void otris(int **players, int kol) {
+void otris(int **players, int kol){
 	int i, j;
-	int A[24];
-	for (i = 0; i < 24; i++) {
-		A[i] = i + 1;
+	int **A;
+	A=(int**)malloc(kol*sizeof(int*));
+	for(i=0;i<kol;i++){
+		A[i]=(int*)malloc(24*sizeof(int));
+	}
+	for (i=0;i<kol;i++){
+		for(j=0;j<24;j++){
+			A[i][j]=j+1;
+		}
+	}
+	for(i=0;i<kol;i++){
+		A[i][players[i][0]]=0;
+
 	}
 	system("clear");
-	if (kol == 4) {
+	if(kol==4){
 		printf("       PLAYER 1                            PLAYER 2\n");
-		for (i = 8; i > -1; i--) {
-			printf("[%d]", A[i]);
+		for(i=8;i>-1;i--){
+			printf("[%d]",A[0][i]);
 		}
-		// PLAYER 2
+		//PLAYER 2
 		printf("    ");
-		for (i = 0; i < 9; i++) {
-			printf("[%d]", A[i]);
+		for(i=0;i<9;i++){
+			printf("[%d]",A[1][i]);
 		}
-		// PLAYER 2
+		//PLAYER 2
 		printf("\n");
-		for (i = 9; i < 10; i++) {
-			printf(
-			    "[%d]                                              "
-			    "    [%d]\n",
-			    A[i], A[i]);
+		for(i=9;i<10;i++){
+			printf("[%d]                                                  [%d]\n",A[0][i], A[1][i]);
 		}
-		printf("[%d]", A[i]);
-		for (i = 11; i < 14; i++) {
-			printf("[%d]", A[i]);
+		printf("[%d]",A[0][i]);
+		for(i=11;i<14;i++){
+			printf("[%d]",A[0][i]);
 		}
-		printf("[%d]                  [%d]", A[i], A[i]);
-		// PLAYER 2
-		for (i = 13; i > 9; i--) {
-			printf("[%d]", A[i]);
+		printf("[%d]                  [%d]",A[0][i],A[1][i]);
+		//PLAYER 2
+		for(i=13;i>9;i--){
+			printf("[%d]",A[1][i]);
 		}
 		printf("\n");
-		// PLAYER 2
-		for (i = 15; i < 16; i++) {
-			printf("                [%d]                  [%d]\n",
-			       A[i], A[i]);
-		}
+		//PLAYER 2
+		for(i=15;i<16;i++){
+			printf("                [%d]                  [%d]\n",A[0][i],A[1][i]);
+		} 
 		printf("    ");
-		for (i = 19; i > 16; i--) {
-			printf("[%d]", A[i]);
+		for(i=19;i>16;i--){
+			printf("[%d]",A[0][i]);
 		}
-		printf("[%d]", A[i]);
-		// PLAYER 2
+		printf("[%d]",A[0][i]);
+		//PLAYER 2
 		printf("                  ");
-		for (i = 16; i < 20; i++) {
-			printf("[%d]", A[i]);
+		for(i=16;i<20;i++){
+			printf("[%d]",A[1][i]);
 		}
-		// PLAYER 2
+		//PLAYER 2
 		printf("\n");
-		for (i = 20; i < 21; i++) {
-			printf(
-			    "    [%d]                                          "
-			    "[%d]\n",
-			    A[i], A[i]);
+		for(i=20;i<21;i++){
+			printf("    [%d]                                          [%d]\n",A[0][i],A[1][i]);
 		}
-		printf("    [%d]", A[i]);
-		for (i = 22; i < 24; i++) {
-			printf("[%d]", A[i]);
+		printf("    [%d]",A[0][i]);
+		for(i=22;i<24;i++){
+			printf("[%d]",A[0][i]);
 		}
 		printf("|¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯|");
-		for (i = 23; i > 20; i--) {
-			printf("[%d]", A[i]);
+		for(i=23;i>20;i--){
+			printf("[%d]",A[1][i]);
 		}
 		printf("\n");
 		printf("                |  .........  .........  |\n");
@@ -76,132 +79,118 @@ void otris(int **players, int kol) {
 		printf("                |  .                  .  |\n");
 		printf("                |  .                  .  |\n");
 		printf("                |  .........  .........  |\n");
-		// PLAYER 3-----------------
-		printf("    ");		       //         |
-		for (i = 21; i < 24; i++) {    //|
-			printf("[%d]", A[i]);  //|
-		}			       //  |
-		// PLAYER 3-----------------
+		//PLAYER 3-----------------
+		printf("    ");//         |
+		for(i=21;i<24;i++){     //|
+			printf("[%d]",A[2][i]);//|
+		}                     //  |
+		//PLAYER 3-----------------
 		printf("|________________________|");
-		// PLAYER 4--------------------
-		for (i = 23; i > 20; i--) {    //        |
-			printf("[%d]", A[i]);  //   |
-		}			       //            |
-		printf("\n");		       //              |
-		// PLAYER 4--------------------
-		for (i = 20; i > 19; i--) {
-			printf(
-			    "    [%d]                                          "
-			    "[%d]\n",
-			    A[i], A[i]);
+		//PLAYER 4--------------------
+		for(i=23;i>20;i--){//        |
+			printf("[%d]",A[3][i]);//   |
+		}              //            |
+		printf("\n");//              |
+		//PLAYER 4--------------------
+		for(i=20;i>19;i--){
+			printf("    [%d]                                          [%d]\n",A[2][i],A[3][i]);
 		}
-		// PLAYER 3---------------------
-		printf("    ");		       //             |
-		for (i = 19; i > 15; i--) {    //         |
-			printf("[%d]", A[i]);  //    |
-		}			       //                           |
-		// PLAYER 3---------------------
-		// PLAYER 4------------------------
-		printf("                  ");  //  |
-		for (i = 16; i < 20; i++) {    //            |
-			printf("[%d]", A[i]);  //       |
-		}			       //                              |
-		printf("\n");		       //                  |
-		// PLAYER 4------------------------
-		for (i = 15; i > 14; i--) {
-			printf("                [%d]                  [%d]\n",
-			       A[i], A[i]);
+		//PLAYER 3---------------------
+		printf("    ");//             |
+		for(i=19;i>15;i--){//         |
+			printf("[%d]",A[2][i]);//    |
+		}//                           |
+		//PLAYER 3---------------------
+		//PLAYER 4------------------------
+		printf("                  ");//  |
+		for(i=16;i<20;i++){//            |
+			printf("[%d]",A[3][i]);//       |
+		}//                              |
+		printf("\n");//                  |
+		//PLAYER 4------------------------
+		for(i=15;i>14;i--){
+			printf("                [%d]                  [%d]\n",A[2][i],A[3][i]);
 		}
-		// PLAYER 3---------------------
-		for (i = 10; i < 15; i++) {    //         |
-			printf("[%d]", A[i]);  //    |
-		}			       //                           |
-		// PLAYER 3---------------------
-		// PLAYER 4------------------------
-		printf("                  ");  //  |
-		for (i = 14; i > 9; i--) {     //             |
-			printf("[%d]", A[i]);  //       |
-		}			       //                              |
-		printf("\n");		       //                  |
-		// PLAYER 4------------------------
-		for (i = 9; i > 8; i--) {
-			printf(
-			    "[%d]                                              "
-			    "    [%d]\n",
-			    A[i], A[i]);
+		//PLAYER 3---------------------
+		for(i=10;i<15;i++){//         |
+			printf("[%d]",A[2][i]);//    |
+		}//                           |
+		//PLAYER 3---------------------
+		//PLAYER 4------------------------
+		printf("                  ");//  |
+		for(i=14;i>9;i--){//             |
+			printf("[%d]",A[3][i]);//       |
+		}//                              |
+		printf("\n");//                  |
+		//PLAYER 4------------------------
+		for(i=9;i>8;i--){
+			printf("[%d]                                                  [%d]\n",A[2][i],A[3][i]);
 		}
-		// PLAYER 3---------------------
-		for (i = 8; i > -1; i--) {     //          |
-			printf("[%d]", A[i]);  //    |
-		}			       //                           |
-		// PLAYER 3---------------------
-		// PLAYER 4------------------------
-		printf("    ");		       //                |
-		for (i = 0; i < 9; i++) {      //              |
-			printf("[%d]", A[i]);  //       |
-		}			       //                              |
-		printf("\n");		       //                  |
-		// PLAYER 4------------------------
+		//PLAYER 3---------------------
+		for(i=8;i>-1;i--){//          |
+			printf("[%d]",A[2][i]);//    |
+		}//                           |
+		//PLAYER 3---------------------
+		//PLAYER 4------------------------
+		printf("    ");//                |
+		for(i=0;i<9;i++){//              |
+			printf("[%d]",A[3][i]);//       |
+		}//                              |
+		printf("\n");//                  |
+		//PLAYER 4------------------------
 		printf("       PLAYER 3                            PLAYER 4\n");
 	}
-	if (kol == 3) {
+	if(kol==3){
 		printf("       PLAYER 1                            PLAYER 2\n");
-		for (i = 8; i > -1; i--) {
-			printf("[%d]", A[i]);
+		for(i=8;i>-1;i--){
+			printf("[%d]",A[0][i]);
 		}
-		// PLAYER 2
+		//PLAYER 2
 		printf("    ");
-		for (i = 0; i < 9; i++) {
-			printf("[%d]", A[i]);
+		for(i=0;i<9;i++){
+			printf("[%d]",A[1][i]);
 		}
-		// PLAYER 2
+		//PLAYER 2
 		printf("\n");
-		for (i = 9; i < 10; i++) {
-			printf(
-			    "[%d]                                              "
-			    "    [%d]\n",
-			    A[i], A[i]);
+		for(i=9;i<10;i++){
+			printf("[%d]                                                  [%d]\n",A[0][i], A[1][i]);
 		}
-		printf("[%d]", A[i]);
-		for (i = 11; i < 14; i++) {
-			printf("[%d]", A[i]);
+		printf("[%d]",A[0][i]);
+		for(i=11;i<14;i++){
+			printf("[%d]",A[0][i]);
 		}
-		printf("[%d]                  [%d]", A[i], A[i]);
-		// PLAYER 2
-		for (i = 13; i > 9; i--) {
-			printf("[%d]", A[i]);
+		printf("[%d]                  [%d]",A[0][i],A[1][i]);
+		//PLAYER 2
+		for(i=13;i>9;i--){
+			printf("[%d]",A[1][i]);
 		}
 		printf("\n");
-		// PLAYER 2
-		for (i = 15; i < 16; i++) {
-			printf("                [%d]                  [%d]\n",
-			       A[i], A[i]);
-		}
+		//PLAYER 2
+		for(i=15;i<16;i++){
+			printf("                [%d]                  [%d]\n",A[0][i],A[1][i]);
+		} 
 		printf("    ");
-		for (i = 19; i > 16; i--) {
-			printf("[%d]", A[i]);
+		for(i=19;i>16;i--){
+			printf("[%d]",A[0][i]);
 		}
-		printf("[%d]", A[i]);
-		// PLAYER 2
+		printf("[%d]",A[0][i]);
+		//PLAYER 2
 		printf("                  ");
-		for (i = 16; i < 20; i++) {
-			printf("[%d]", A[i]);
+		for(i=16;i<20;i++){
+			printf("[%d]",A[1][i]);
 		}
-		// PLAYER 2
+		//PLAYER 2
 		printf("\n");
-		for (i = 20; i < 21; i++) {
-			printf(
-			    "    [%d]                                          "
-			    "[%d]\n",
-			    A[i], A[i]);
+		for(i=20;i<21;i++){
+			printf("    [%d]                                          [%d]\n",A[0][i],A[1][i]);
 		}
-		printf("    [%d]", A[i]);
-		for (i = 22; i < 24; i++) {
-			printf("[%d]", A[i]);
+		printf("    [%d]",A[0][i]);
+		for(i=22;i<24;i++){
+			printf("[%d]",A[0][i]);
 		}
 		printf("|¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯|");
-		for (i = 23; i > 20; i--) {
-			printf("[%d]", A[i]);
+		for(i=23;i>20;i--){
+			printf("[%d]",A[1][i]);
 		}
 		printf("\n");
 		printf("                |  .........  .........  |\n");
@@ -211,101 +200,94 @@ void otris(int **players, int kol) {
 		printf("                |  .                  .  |\n");
 		printf("                |  .                  .  |\n");
 		printf("                |  .........  .........  |\n");
-		// PLAYER 3-----------------
-		printf("    ");		       //         |
-		for (i = 21; i < 24; i++) {    //|
-			printf("[%d]", A[i]);  //|
-		}			       //  |
-		// PLAYER 3-----------------
+		//PLAYER 3-----------------
+		printf("    ");//         |
+		for(i=21;i<24;i++){     //|
+			printf("[%d]",A[2][i]);//|
+		}                     //  |
+		//PLAYER 3-----------------
 		printf("|________________________|\n");
-		for (i = 20; i > 19; i--) {
-			printf("    [%d]\n", A[i]);
+		for(i=20;i>19;i--){
+			printf("    [%d]\n",A[2][i]);
 		}
-		// PLAYER 3---------------------
-		printf("    ");		       //             |
-		for (i = 19; i > 15; i--) {    //         |
-			printf("[%d]", A[i]);  //    |
-		}			       //                           |
-		// PLAYER 3---------------------
+		//PLAYER 3---------------------
+		printf("    ");//             |
+		for(i=19;i>15;i--){//         |
+			printf("[%d]",A[2][i]);//    |
+		}//                           |
+		//PLAYER 3---------------------
 		printf("\n");
-		for (i = 15; i > 14; i--) {
-			printf("                [%d]\n", A[i]);
+		for(i=15;i>14;i--){
+			printf("                [%d]\n",A[2][i]);
 		}
-		// PLAYER 3---------------------
-		for (i = 10; i < 15; i++) {    //         |
-			printf("[%d]", A[i]);  //    |
-		}			       //                           |
-		// PLAYER 3---------------------
+		//PLAYER 3---------------------
+		for(i=10;i<15;i++){//         |
+			printf("[%d]",A[2][i]);//    |
+		}//                           |
+		//PLAYER 3---------------------
 		printf("\n");
-		for (i = 9; i > 8; i--) {
-			printf("[%d]\n", A[i]);
+		for(i=9;i>8;i--){
+			printf("[%d]\n",A[2][i]);
 		}
-		// PLAYER 3---------------------
-		for (i = 8; i > -1; i--) {     //          |
-			printf("[%d]", A[i]);  //    |
-		}			       //                           |
-		// PLAYER 3---------------------
+		//PLAYER 3---------------------
+		for(i=8;i>-1;i--){//          |
+			printf("[%d]",A[2][i]);//    |
+		}//                           |
+		//PLAYER 3---------------------
 		printf("\n");
 		printf("       PLAYER 3\n");
 	}
-	if (kol == 2) {
+	if(kol==2){
 		printf("       PLAYER 1                            PLAYER 2\n");
-		for (i = 8; i > -1; i--) {
-			printf("[%d]", A[i]);
+		for(i=8;i>-1;i--){
+			printf("[%d]",A[0][i]);
 		}
-		// PLAYER 2
+		//PLAYER 2
 		printf("    ");
-		for (i = 0; i < 9; i++) {
-			printf("[%d]", A[i]);
+		for(i=0;i<9;i++){
+			printf("[%d]",A[1][i]);
 		}
-		// PLAYER 2
+		//PLAYER 2
 		printf("\n");
-		for (i = 9; i < 10; i++) {
-			printf(
-			    "[%d]                                              "
-			    "    [%d]\n",
-			    A[i], A[i]);
+		for(i=9;i<10;i++){
+			printf("[%d]                                                  [%d]\n",A[0][i], A[1][i]);
 		}
-		printf("[%d]", A[i]);
-		for (i = 11; i < 14; i++) {
-			printf("[%d]", A[i]);
+		printf("[%d]",A[0][i]);
+		for(i=11;i<14;i++){
+			printf("[%d]",A[0][i]);
 		}
-		printf("[%d]                  [%d]", A[i], A[i]);
-		// PLAYER 2
-		for (i = 13; i > 9; i--) {
-			printf("[%d]", A[i]);
+		printf("[%d]                  [%d]",A[0][i],A[1][i]);
+		//PLAYER 2
+		for(i=13;i>9;i--){
+			printf("[%d]",A[1][i]);
 		}
 		printf("\n");
-		// PLAYER 2
-		for (i = 15; i < 16; i++) {
-			printf("                [%d]                  [%d]\n",
-			       A[i], A[i]);
-		}
+		//PLAYER 2
+		for(i=15;i<16;i++){
+			printf("                [%d]                  [%d]\n",A[0][i],A[1][i]);
+		} 
 		printf("    ");
-		for (i = 19; i > 16; i--) {
-			printf("[%d]", A[i]);
+		for(i=19;i>16;i--){
+			printf("[%d]",A[0][i]);
 		}
-		printf("[%d]", A[i]);
-		// PLAYER 2
+		printf("[%d]",A[0][i]);
+		//PLAYER 2
 		printf("                  ");
-		for (i = 16; i < 20; i++) {
-			printf("[%d]", A[i]);
+		for(i=16;i<20;i++){
+			printf("[%d]",A[1][i]);
 		}
-		// PLAYER 2
+		//PLAYER 2
 		printf("\n");
-		for (i = 20; i < 21; i++) {
-			printf(
-			    "    [%d]                                          "
-			    "[%d]\n",
-			    A[i], A[i]);
+		for(i=20;i<21;i++){
+			printf("    [%d]                                          [%d]\n",A[0][i],A[1][i]);
 		}
-		printf("    [%d]", A[i]);
-		for (i = 22; i < 24; i++) {
-			printf("[%d]", A[i]);
+		printf("    [%d]",A[0][i]);
+		for(i=22;i<24;i++){
+			printf("[%d]",A[0][i]);
 		}
 		printf("|¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯|");
-		for (i = 23; i > 20; i--) {
-			printf("[%d]", A[i]);
+		for(i=23;i>20;i--){
+			printf("[%d]",A[1][i]);
 		}
 		printf("\n");
 		printf("                |  .........  .........  |\n");
