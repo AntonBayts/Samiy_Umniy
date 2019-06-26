@@ -1,17 +1,4 @@
 #include "Game_Process.h"
-void AddPlayers(int quantity_players, int **player)
-{
-    player = (int **)malloc(4 * sizeof(int *));
-    for (int i = 0; i < quantity_players; i++)
-    {
-        player[i] = (int *)malloc(2 * sizeof(int));
-        for (int j = 0; j < 2; j++)
-        {
-            player[i][0] = i++;
-            player[i][1] = 0;
-        };
-    };
-}
 int WhatFirst(int quantity_players)
 {
     int k;
@@ -29,14 +16,11 @@ int Trow_roll()
 }
 int MovementPlayers(int **player, int quantity_players, int number_player)
 {
-    int k, i, m;
-    const char bros[] = "THROW", ex[] = "EXIT";
-    char inp[80];
+    int k, i, m, l;
     while (1)
     {
         printf(" Input THROW or EXIT: ");
-        scanf("%c", &inp[80]);
-        i = strcmp(bros, inp);
+        scanf("%c", &i);
         if (i == 0)
         {
             m = Trow_roll();
@@ -46,8 +30,7 @@ int MovementPlayers(int **player, int quantity_players, int number_player)
         }
         else
         {
-            i = strcmp(ex, inp);
-            if (i == 0)
+            if (i == 2)
             {
                 k = 0;
                 return k;
@@ -61,14 +44,47 @@ int MovementPlayers(int **player, int quantity_players, int number_player)
 }
 void LogicMain(int quantity_players)
 {
-    int final_location = 25, number_player = 0, **player;
-    AddPlayers(quantity_players);
+    int final_location = 25, number_player = 1, **player, z, i, l;
     number_player = WhatFirst(player, quantity_players);
-    while (player[number_player][1] <= final_location)
+    player = (int **)malloc(4 * sizeof(int *)); //Ð¼Ð°ÑÑÐ¸Ð² Ð¸ Ñ‚Ð°Ð¼ Ð¸ Ñ‚Ð°Ð¼ ÑƒÐ¼ÐµÐ½ÑŒÑˆÐ¸Ñ‚ÑŒ Ð½Ð° ÐµÐ´Ð¸Ð½Ð¸Ñ†Ñƒ
+    for (int i = 0; i < quantity_players; i++)
     {
-        MovementPlayers(player, quantity_players, number_player);
-        number_player++;
+        player[i] = (int *)malloc(2 * sizeof(int));
     }
-    number_player--;
-    GameOver(number_player);
+    for (i = 0; i < quantity_players; i++)
+    {
+        player[i][0] = i + 1;
+        player[i][1] = 0;
+    }
+    number_player = WhatFirst(quantity_players);
+    while (1)
+    {
+        otris(player, quantity_players, number_player);
+        z = MovementPlayers(player, quantity_players, number_player);
+        if (z == 0)
+            break;
+        if (z == 1)
+        {
+            if (player[number_player][1] < 25)
+            {
+                number_player++;
+                if (number_player >= quantity_players)
+                    number_player = 0;
+            }
+            else
+            {
+                otriswin(player, quantity_players);
+                while (1)
+                {
+                    printf("                 Enter 1 to exit the menu: ");
+                    scanf("%d", &l);
+                    if (l == 1)
+                        break;
+                    else
+                        printf("                Error!\n");
+                }
+                break;
+            }
+        }
+    }
 }
