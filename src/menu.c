@@ -31,6 +31,21 @@ int Menu(int &quantityplayers){
 			printf("			Have you read the description?\n");
 			printf("                            Input 1)Y or 2)N: ");
 			scanf("%d", &f);
+			while(f!=1 && f!=2){
+				system("clear");
+				printf(" /=======/ //     //===/  //===/ // //===/ //   // //===/ ////// //===/ //==/ //\n ");
+				printf("   //    //     //      //     // //      //  // //     //   / //     //   =//=\n");
+				printf("   //    //==// //==/   //     // //===/   // // //==/  //     //==/   ///  //\n");
+				printf("  //    //  // //      //     // //        //// //     //     //        // //\n");
+				printf(" //    //  // //===/  //===/ // //===/     /// //===/ //     //===/ /==// //=/\n");
+				printf("\n");
+				printf("                 Attention before starting the game is advised\n");
+				printf("                       to read the description of the game.\n");
+				printf("                         	    Error!\n");
+				printf("			Have you read the description?\n");
+				printf("                            Input 1)Y or 2)N: ");
+				scanf("%d", &f);
+			}
 			if(f==2){
 				z=2;
 			}
@@ -112,4 +127,5 @@ int Menu(int &quantityplayers){
 		}
 	}
 }
+
 
