@@ -1,10 +1,10 @@
 #include "Game_Process.h"
 void AddPlayers(int quantity_players, int **player)
 {
-    player = (int **)malloc(5 * sizeof(int *));
+    player = (int **)malloc(4 * sizeof(int *));
     for (int i = 0; i < quantity_players; i++)
     {
-        player[i] = (int *)malloc(3 * sizeof(int));
+        player[i] = (int *)malloc(2 * sizeof(int));
         for (int j = 0; j < 2; j++)
         {
             player[i][0] = i++;
@@ -19,6 +19,45 @@ int WhatFirst(int quantity_players)
     quantity_players--;
     k = rand() % (quantity_players - 0 + 1) + 0;
     return k;
+}
+int Trow_roll()
+{
+    int k;
+    srand(time(NULL));
+    k = rand() % (6 - 1 + 1) + 1;
+    return k;
+}
+int MovementPlayers(int **player, int quantity_players, int number_player)
+{
+    int k, i, m;
+    const char bros[] = "THROW", ex[] = "EXIT";
+    char inp[80];
+    while (1)
+    {
+        printf(" Input THROW or EXIT: ");
+        scanf("%c", &inp[80]);
+        i = strcmp(bros, inp);
+        if (i == 0)
+        {
+            m = Trow_roll();
+            player[number_player][1] = player[number_player][1] + m;
+            k = 1;
+            return k;
+        }
+        else
+        {
+            i = strcmp(ex, inp);
+            if (i == 0)
+            {
+                k = 0;
+                return k;
+            }
+            else
+            {
+                printf("       Error!\n");
+            }
+        }
+    }
 }
 void LogicMain(int quantity_players)
 {
