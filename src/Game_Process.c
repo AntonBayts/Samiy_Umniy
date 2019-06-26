@@ -1,16 +1,8 @@
 #include "Game_Process.h"
-int **player; // ����� ������� ����� ���������� ����
-void FillBoard(int board[])
+void AddPlayers(int quantity_players, int **player)
 {
-    for (int i = 0; i < 25; i++)
-    {
-        board[i] = i++;
-    }
-}
-void AddPlayers(int quantity_players)
-{
-    player = (int **)malloc(5 * sizeof(int *));      //������ � ��� � ��� ��������� �� �������
-    for (int i = 0; i < 4 /*quantity_players*/; i++) //�������� ������ �� ���-�� �������
+    player = (int **)malloc(5 * sizeof(int *));
+    for (int i = 0; i < quantity_players; i++)
     {
         player[i] = (int *)malloc(3 * sizeof(int));
         for (int j = 0; j < 2; j++)
@@ -20,15 +12,22 @@ void AddPlayers(int quantity_players)
         };
     };
 }
+int WhatFirst(int quantity_players)
+{
+    int k;
+    srand(time(NULL));
+    quantity_players--;
+    k = rand() % (quantity_players - 0 + 1) + 0;
+    return k;
+}
 void LogicMain(int quantity_players)
 {
-    int final_location = 25, board[25], number_player = 0;
-    FillBoard(board);
+    int final_location = 25, number_player = 0, **player;
     AddPlayers(quantity_players);
     number_player = WhatFirst(player, quantity_players);
-    while (player[number_player][1] <= final_location) //заменить никнейм на правильное поле
+    while (player[number_player][1] <= final_location)
     {
-        MovementPlayers(player, board, quantity_players, number_player);
+        MovementPlayers(player, quantity_players, number_player);
         number_player++;
     }
     number_player--;
