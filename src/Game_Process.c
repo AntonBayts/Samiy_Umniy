@@ -61,7 +61,7 @@ void Сheck(int **player, int number_player, int *Skip_stroke)
 }
 void LogicMain(int quantity_players)
 {
-    int final_location = 25, number_player = 1, **player, z, i, l;
+    int final_location = 25, number_player = 1, **player, z, i, l, *Skip_stroke;
     number_player = WhatFirst(player, quantity_players);
     player = (int **)malloc(4 * sizeof(int *));
     for (int i = 0; i < quantity_players; i++)
