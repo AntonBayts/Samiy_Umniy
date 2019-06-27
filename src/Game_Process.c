@@ -25,11 +25,13 @@ int MovementPlayers(int **player, int quantity_players, int number_player)
         if (i == 1)
         {
             m = Trow_roll();
-            while (m > 0)
-            {
-                player[number_player][1]++;
-                m--;
-                otris(player, quantity_players);
+            while(m>0){
+                if(player[number_player][1]<25){
+                    player[number_player][1]++;
+                    m--;
+                }
+                else break;
+                otris(player,quantity_players);
                 sleep(1);
             }
             k = 1;
@@ -49,8 +51,10 @@ int MovementPlayers(int **player, int quantity_players, int number_player)
         }
     }
 }
-void Сheck(int **player, int number_player, int *Skip_stroke)
+void check(int **player, int number_player, int *Skip_stroke, char *questions[10], char *answers[10], int quantity_players)
 {
+    int i, j, k, p, a, f;
+    char inp[80];
     if (player[number_player][1] == 4 || player[number_player][1] == 14 || player[number_player][1] == 21)
     {
         Skip_stroke[number_player]++;
@@ -58,10 +62,56 @@ void Сheck(int **player, int number_player, int *Skip_stroke)
         sleep(1.5);
         system("clear");
     }
+    k=(player[number_player][1]+1)%3;
+    if(k==0 && player[number_player][1]!=14){
+        system("clear");
+        p=player[number_player][1]/3;
+        printf("%s\n",questions[p]);
+        printf("Input answer:");
+        fgets(inp,20,stdin);
+        fgets(inp,20,stdin);
+        a=strlen(inp);
+        f=strlen(answers[p]);
+        f=f+1;
+        j=1;
+        if(a==f){
+            j=0;
+            for(i=0;answers[p][i]!='\0';i++){
+                if(inp[i]!=answers[p][i])j++;
+            }
+        }
+        if(j==0){
+            printf("Good job!\n");
+            sleep(1);
+            for(i=0;i<rand()%(3-1+1)+1;i++){
+                if(player[number_player][1]<25){
+                    player[number_player][1]++;
+                    //printf("Good job!\n");
+                    otris(player,quantity_players);
+                    sleep(1);
+                }
+                else break;
+            }
+
+        }
+        if(j!=0 || a!=f){
+            printf("It's so bad(\n");
+            sleep(1);
+            for(i=0;i<rand()%(3-1+1)+1;i++){
+                if(player[number_player][1]>0){
+                    player[number_player][1]--;
+                    //printf("Good job!\n");
+                    otris(player,quantity_players);
+                    sleep(1);
+                }
+                else break;
+            }
+        }
+    }
 }
-void LogicMain(int quantity_players)
+void LogicMain(int quantity_players, char *questions[10], char *answers[10])
 {
-    int final_location = 25, number_player = 1, **player, z, i, l;
+    int number_player = 1, **player, z, i, l;
     number_player = WhatFirst(player, quantity_players);
     player = (int **)malloc(4 * sizeof(int *));
     for (int i = 0; i < quantity_players; i++)
