@@ -1,5 +1,5 @@
-#include <stdio.h>
-#include <stdlib.h>
+#include "otris.h"
+extern int quantity_players;
 
 void otriswin(int **player, int quantity_players) {
 	int i;

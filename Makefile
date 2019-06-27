@@ -12,13 +12,13 @@ OB = build/menu.o build/Game_process.o build/otris.o
 
 all: bin build default
 
-default: bin/Samiy_Umniy.exe
+default: bin/Samiy_Umniy
 
-bin/Samiy_Umniy.exe: $(OBJECTS)
+bin/Samiy_Umniy: $(OBJECTS)
 
-	$(CXX) $(FLAGS) $(OBJECTS) -o bin/Samiy_Umniy.exe
+	$(CXX) $(FLAGS) $(OBJECTS) -o bin/Samiy_Umniy
 
-build/main.o: src/main.c src/Game_Process.h src/menu.h src/otris.h
+build/main.o: src/main.c src/menu.h src/Game_Process.h src/otris.h
 
 	$(CXX) $(CFLAGS) src/main.c -o build/main.o
 
@@ -26,9 +26,9 @@ build/menu.o: src/menu.c src/menu.h
 
 	$(CXX) $(CFLAGS) src/menu.c -o build/menu.o
 
-build/Game_Process.o: src/Game_Process.c src/Game_Procces.h src/otris.h
+build/Game_Process.o: src/Game_Process.c src/Game_Process.h src/otris.h
 
-	$(CXX) $(CFLAGS) src/Game_Process.c -o build/Game_Procces.o
+	$(CXX) $(CFLAGS) src/Game_Process.c -o build/Game_Process.o
 
 build/otris.o: src/otris.c src/otris.h
 
@@ -46,3 +46,6 @@ clean:
 
 	-rm -rf build bin
 
+run:
+
+	bin/Samiy_Umniy

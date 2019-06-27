@@ -1,4 +1,7 @@
 #include "Game_Process.h"
+#include "otris.h"
+extern int quantity_players;
+
 int WhatFirst(int quantity_players) {
 	int k;
 	srand(time(NULL));
@@ -41,8 +44,7 @@ int MovementPlayers(int **player, int quantity_players, int number_player) {
 		}
 	}
 }
-void check(int **player, int number_player, int *Skip_stroke,
-	   char *questions[10], char *answers[10], int quantity_players) {
+void check(int **player, int number_player, int *Skip_stroke, char *questions[10], char *answers[10], int quantity_players) {
 	int i, j, k, p, a, f;
 	char inp[80];
 	if (player[number_player][1] == 4 || player[number_player][1] == 14 ||
@@ -100,7 +102,7 @@ void check(int **player, int number_player, int *Skip_stroke,
 }
 void LogicMain(int quantity_players, char *questions[10], char *answers[10]) {
 	int number_player = 1, **player, z, i, l, *Skip_stroke;
-	number_player = WhatFirst(player, quantity_players);
+	number_player = WhatFirst(quantity_players);
 	player = (int **)malloc(4 * sizeof(int *));
 	for (int i = 0; i < quantity_players; i++) {
 		player[i] = (int *)malloc(2 * sizeof(int));
@@ -115,7 +117,7 @@ void LogicMain(int quantity_players, char *questions[10], char *answers[10]) {
 	}
 	number_player = WhatFirst(quantity_players);
 	while (1) {
-		otris(player, quantity_players, number_player);
+		otris(player, quantity_players);
 		if (Skip_stroke[number_player] == 0) {
 			z = MovementPlayers(player, quantity_players,
 					    number_player);
@@ -132,7 +134,7 @@ void LogicMain(int quantity_players, char *questions[10], char *answers[10]) {
 		if (z == 0) break;
 		if (z == 1) {
 			if (player[number_player][1] < 25) {
-				check(player, number_player, Skip_stroke);
+				check(player, number_player, Skip_stroke, questions, answers, quantity_players);
 				number_player++;
 				if (number_player >= quantity_players)
 					number_player = 0;

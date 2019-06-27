@@ -3,10 +3,12 @@
 #include "Game_Process.h"
 #include "menu.h"
 #include "otris.h"
+int meny();
+int quantity_players;
 
 int main()
 {
-	int quantity_players = 0, x, i;
+	int x, i;
 	char *questions[10], *answers[10];
 	for (i = 0; i < 10; i++)
 	{
@@ -137,7 +139,9 @@ int main()
 	}
 	while (1)
 	{
-		x = Menu(quantity_players);
+		quantity_players=0;
+		x= meny(quantity_players);
+		printf("%d", x);
 		if (x == 0)
 			return 0;
 		if (x == 1)

@@ -3,6 +3,6 @@
 #include <stdlib.h>
 #include <stdio.h>
 
-int Menu(int &quantity_players);
+int meny();
 
-#define
+#endif

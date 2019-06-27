@@ -1,7 +1,7 @@
-#include <stdio.h>
-#include <stdlib.h>
+#include "menu.h"
+extern int quantity_players;
 
-int Menu(int &quantityplayers) {
+int meny() {
 	int z, k;
 	int f;
 	while (1) {
@@ -121,9 +121,9 @@ int Menu(int &quantityplayers) {
 				    "                     Enter the number of "
 				    "players from 2 to 4: ");
 				while (1) {
-					scanf("%d", &quantityplayers);
-					if (quantityplayers > 1 &&
-					    quantityplayers < 5) {
+					scanf("%d", &quantity_players);
+					if (quantity_players > 1 &&
+					    quantity_players < 5) {
 						k = 1;
 						return k;
 					} else {
