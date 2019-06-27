@@ -5,7 +5,6 @@
 #include <stdlib.h>
 
 int meny();
-int quantity_players;
 
 int main()
 {

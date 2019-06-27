@@ -6,33 +6,44 @@ FLAGS  =  -Wall -Werror -std=c99
 
 OBJECTS = build/main.o build/menu.o build/Game_Process.o build/otris.o
 
-OB = build/menu.o build/Game_process.o build/otris.o
+OB = build/menu.o build/Game_Process.o build/otris.o
 
-.PHONY: clean all bin build default
+TEST_O = build/test.o
 
-all: bin build default
+.PHONY: clean all bin build default test
 
-default: bin/Samiy_Umniy
+all: default test
+
+default: bin build bin/Samiy_Umniy
+
+test: bin build bin/Samiy_Umniy_Test
+	bin/Samiy_Umniy_Test
 
 bin/Samiy_Umniy: $(OBJECTS)
 
 	$(CXX) $(FLAGS) $(OBJECTS) -o bin/Samiy_Umniy
 
-build/main.o: src/main.c src/menu.h src/Game_Process.h src/otris.h
+bin/Samiy_Umniy_Test: $(TEST_O)
+	$(CXX) $(FLAGS) $(TEST_O) $(OB) -o bin/Samiy_Umniy_Test
 
-	$(CXX) $(CFLAGS) src/main.c -o build/main.o
+build/test.o: src/test/test.c
+	$(CXX) $(CFLAGS) src/test/test.c -I thirdparty/ -I src/main/ -o build/test.o
 
-build/menu.o: src/menu.c src/menu.h
+build/main.o: src/main/main.c src/main/menu.h src/main/Game_Process.h src/main/otris.h
 
-	$(CXX) $(CFLAGS) src/menu.c -o build/menu.o
+	$(CXX) $(CFLAGS) src/main/main.c -o build/main.o
 
-build/Game_Process.o: src/Game_Process.c src/Game_Process.h src/otris.h
+build/menu.o: src/main/menu.c src/main/menu.h
 
-	$(CXX) $(CFLAGS) src/Game_Process.c -o build/Game_Process.o
+	$(CXX) $(CFLAGS) src/main/menu.c -o build/menu.o
 
-build/otris.o: src/otris.c src/otris.h
+build/Game_Process.o: src/main/Game_Process.c src/main/Game_Process.h src/main/otris.h
 
-	$(CXX) $(CFLAGS) src/otris.c -o build/otris.o
+	$(CXX) $(CFLAGS) src/main/Game_Process.c -o build/Game_Process.o
+
+build/otris.o: src/main/otris.c src/main/otris.h
+
+	$(CXX) $(CFLAGS) src/main/otris.c -o build/otris.o
 
 build: 
 
