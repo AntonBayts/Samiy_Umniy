@@ -44,7 +44,8 @@ int MovementPlayers(int **player, int quantity_players, int number_player) {
 		}
 	}
 }
-void check(int **player, int number_player, int *Skip_stroke, char *questions[10], char *answers[10], int quantity_players) {
+void check(int **player, int number_player, int *Skip_stroke,
+	   char *questions[10], char *answers[10], int quantity_players) {
 	int i, j, k, p, a, f;
 	char inp[80];
 	if (player[number_player][1] == 4 || player[number_player][1] == 14 ||
@@ -134,7 +135,8 @@ void LogicMain(int quantity_players, char *questions[10], char *answers[10]) {
 		if (z == 0) break;
 		if (z == 1) {
 			if (player[number_player][1] < 25) {
-				check(player, number_player, Skip_stroke, questions, answers, quantity_players);
+				check(player, number_player, Skip_stroke,
+				      questions, answers, quantity_players);
 				number_player++;
 				if (number_player >= quantity_players)
 					number_player = 0;
