@@ -7,11 +7,11 @@
 int meny();
 int quantity_players;
 
-main
+int main()
 {
     int x, i;
     char *questions[10], *answers[10];
-    for (i = 0; i < 10; i) {
+    for (i = 0; i < 10; i++) {
         if (i == 0) {
             questions[i] = (char*)malloc(
                     strlen("Nguyen is the most common last name in "
